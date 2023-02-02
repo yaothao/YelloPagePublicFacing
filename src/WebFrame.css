@@ -1,0 +1,23 @@
+body {
+    font-family: sans-serif;
+}
+
+.webframe{
+    margin-left: 10px;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+}
+
+.webframe button {
+    width: 100px;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.webframe button:hover {
+    background-color: goldenrod;
+    text-shadow: 2px;
+}

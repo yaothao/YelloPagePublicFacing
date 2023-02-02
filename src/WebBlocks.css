@@ -1,0 +1,12 @@
+body {
+    font-family: sans-serif;
+}
+
+.webblocks
+{   
+    margin-top: 200px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 5px;
+    gap: 10px;
+}

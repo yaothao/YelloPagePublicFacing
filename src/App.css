@@ -1,0 +1,27 @@
+.head {
+  margin-left: 30;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  
+}
+
+.back_button:hover {
+  color: goldenrod;
+}
+
+.back_button {
+  left: 0;
+  width: 80px;
+  margin-bottom: 5px;
+}
+
+.searchlayer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
