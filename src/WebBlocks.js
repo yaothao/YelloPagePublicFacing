@@ -1,3 +1,5 @@
+// the entire section that contains each individual web blocks
+
 import React from "react";
 import Helpers from "./Helpers";
 import ListItem from "./ListItem";
@@ -30,9 +32,11 @@ function WebBlocks() {
 
     let filtered = element.filter(item => Helpers.contains(item.book_name, item.year_published, item.category, tagList));
 
-    let renderedItems = filtered.map(({ url, book_name, year_published, category }, index) => {
+    let renderedItems = filtered.map(({ url_name, url, book_name, year_published, category }, index) => {
       return (
         <ListItem
+          key={index}
+          url_name={url_name}
           url={url}
           book_name={book_name}
           year_published={year_published}

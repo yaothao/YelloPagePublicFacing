@@ -2,8 +2,8 @@ import './ListItem.css';
 import { useStateValue } from "./StateProvider";
 import Tag from './Tag';
 
-
-function ListItem({ url, book_name, year_published, category}) {
+// Forms each individial block of webpages
+function ListItem({ url_name, url, book_name, year_published, category}) {
     const [state, dispatch] = useStateValue();
     // const tags = book_name.concat(year_published, category);
     const handleElementClick = (url) => {
@@ -15,6 +15,7 @@ function ListItem({ url, book_name, year_published, category}) {
     const renderedBookTags = book_name.map((tag, index) => {
         return(
             <Tag 
+            key={index}
             tag={tag}
             filter='book'
             />
@@ -23,6 +24,7 @@ function ListItem({ url, book_name, year_published, category}) {
     const renderedYearTags = year_published.map((tag, index) => {
         return(
             <Tag 
+            key={index}
             tag={tag}
             filter='year'
             />
@@ -32,6 +34,7 @@ function ListItem({ url, book_name, year_published, category}) {
     const renderedCategoryTags = category.map((tag, index) => {
         return(
             <Tag 
+            key={index}
             tag={tag}
             filter='category'
             />
@@ -40,7 +43,7 @@ function ListItem({ url, book_name, year_published, category}) {
       
     return (
         <li style={{padding: 10, margin: 10, listStyle: 'none', background: '#efefef', borderRadius: '10px', boxShadow: '1px 1px 5px #aaa'}}>
-            <h2 onClick={(e) => handleElementClick(url, e)} style={{color: 'black'}} >Web Name</h2>
+            <h2 onClick={(e) => handleElementClick(url, e)} style={{color: 'black'}} >{url_name}</h2>
             <ul className='tagsList' style={{padding: 0}}>{renderedBookTags}{renderedYearTags}{renderedCategoryTags}</ul>
         </li>
     );

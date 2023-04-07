@@ -1,3 +1,5 @@
+// used for customized state value
+
 export const initialState = {
     tagList: [
       {'filter': 'book', 'data':[]},
@@ -6,6 +8,8 @@ export const initialState = {
     ],
 
     element: [],
+
+    total_tag: [],
 
     frame: [false,''],
   };
@@ -54,15 +58,32 @@ export const initialState = {
         }
       
       case 'addElement': 
+        
+        var book_data = new Set()
+        var year_data = new Set()
+        var category_data = new Set()
+
+        action.item.forEach(element => {
+          book_data.add(...element.book_name)
+          year_data.add(...element.year_published)
+          category_data.add(...element.category)
+        });
+
+        var new_total_tag = []
+        new_total_tag[0] = [...book_data]
+        new_total_tag[1] = [...year_data]
+        new_total_tag[2] = [...category_data]
+        
         return{
           ...state,
           element: action.item,
+          total_tag: new_total_tag,
         }
       
       case 'openurl':
         return{
           ...state,
-          frame:[true, 'https://web.archive.org/web/1999id_/' + action.item]
+          frame:[true, 'https://web.archive.org/web/2000id_/' + action.item]
         }
       
       case 'closeurl':

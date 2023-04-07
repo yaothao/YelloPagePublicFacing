@@ -1,3 +1,5 @@
+// present the selected web page in iframe
+
 import React from "react";
 import { useStateValue } from "./StateProvider";
 import './WebFrame.css';
@@ -13,7 +15,7 @@ function WebFrame() {
     return (
         <div className="webframe">
             <button onClick={() => {handleBackClick()}}>Go Back</button>
-            <iframe src={frame[1]} width={'1400px'} height={'780px'}></iframe>
+            <iframe src={frame[1]} width={'1400px'} height={'730px'}></iframe>
         </div>
         
     )

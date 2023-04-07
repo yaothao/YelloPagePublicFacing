@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useStateValue } from './StateProvider';
-import Helpers from "./Helpers";
 import './SearchBar.css';
 
 
 function SearchBar () {
-    const [{tagList}, dispatch] = useStateValue();
+    const [searchTerm, setSearchTerm] = useState('');
+
     // const [inputValue, setInputValue] = useState('');
     
     // const handleNewTag = (tags) => {
@@ -40,21 +39,19 @@ function SearchBar () {
         //   break;
     //   }
     // }
-    
-    const handleTagDelete = (index, filter, e) => {
-    //   deleteTag(index, () => {
-    //     this.props.onTagChange(this.state.tags);
-    //   });
-        console.log("handleTagDelete");
-        dispatch({
-            type: 'deleteTag',
-            item: {
-                filter: filter,
-                index: index,
-            }
-        })
-    }
-    
+    // const handleTagDelete = (index, filter, e) => {
+    // //   deleteTag(index, () => {
+    // //     this.props.onTagChange(this.state.tags);
+    // //   });
+    //     console.log("handleTagDelete");
+    //     dispatch({
+    //         type: 'deleteTag',
+    //         item: {
+    //             filter: filter,
+    //             index: index,
+    //         }
+    //     })
+    // }
     // const deleteTag = (index, callback) => {
     //   let tags = this.state.tags.slice();
       
@@ -87,67 +84,137 @@ function SearchBar () {
     // const componentWillReceiveProps = (nextProps) => {
     //   updateControlledTags(nextProps.tags);
     // }
-    
+    // const renderBookTags = (book_name) => {
+    //     const book_tag_list = book_name?.map((tag, index) => {
+    //         return(
+    //             <Tag 
+    //                 key={index}
+    //                 tag={tag}
+    //                 filter='book'
+    //             /> 
+    //             )
+            
+    //     })
+    //     return book_tag_list
+    // }
+    // const renderYearTags = (year_name) => {
+    //     const year_tag_list = year_name?.map((tag, index) => {
+    //         return(
+    //             <Tag 
+    //                 key={index}
+    //                 tag={tag}
+    //                 filter='year'
+    //             /> 
+    //             )
+            
+    //     })
+    //     return year_tag_list
+    // }
+    // const renderCategoryTags = (category_name) => {
+    //     const category_tag_list = category_name?.map((tag, index) => {
+    //         return(
+    //             <Tag 
+    //                 key={index}
+    //                 tag={tag}
+    //                 filter='category'
+    //             /> 
+    //             )
+            
+    //     })
+    //     return category_tag_list
+    // }
+
+    const handleSearch = () => {
+        try {
+        //   const response = await axios.get(`/api/search?query=${searchTerm}`);
+        //   setResults(response.data);
+           console.log({searchTerm}); 
+        } catch (error) {
+          console.error(error);
+        }
+    };
+
     return (
         <div className="searchbar">
             
-            <div className="tagInputWrapper">     
-                <TagsList 
+            <div className="tagInputWrapper"> 
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button onClick={handleSearch}>Search</button>    
+                {/* <TagsList 
                     tagList={tagList} 
                     onTagDelete={handleTagDelete} 
                     // hashtag={hashtag}
-                />
+                /> */}
             </div>
-            <div>
-            <ul className="filterType">
-                <li style={{listStyle: 'none', padding: 3}}>
-                    Book Name
-                </li>
-                <li style={{listStyle: 'none', padding: 3}}>
-                    Year Published
-                </li>
-                <li style={{listStyle: 'none', padding: 3}}>
-                    Category
-                </li>
-            </ul>
-            </div>
+            {/* <div>
+                <ul className="filterType">
+                    <li style={{listStyle: 'none', padding: 3}}>
+                        <div className="type-title">
+                            Book Name:
+                        </div>
+                        <div className="tags-list">
+                            {renderBookTags(total_tag[0])}
+                        </div>
+                        
+                    </li>
+                    <li style={{listStyle: 'none', padding: 3}}>
+                        <div className="type-title">
+                            Year Published:
+                        </div>
+                        <div className="tags-list">
+                            {renderYearTags(total_tag[1])}
+                        </div>
+                    </li>
+                    <li style={{listStyle: 'none', padding: 3}}>
+                        <div className="type-title">
+                            Category:
+                        </div>
+                        <div className="tags-list">
+                            {renderCategoryTags(total_tag[2])}
+                        </div>
+                    </li>
+                </ul>
+            </div> */}
     </div>
     );
 }
 
-const TagsList = ({ tagList, onTagDelete }) => {
-    let list = [];
-    for (let i = 0; i < tagList.length; i++) {
-        if (tagList[i].data.length > 0) {
-            var current = tagList[i].data.map(( tag, index ) => (
-                <DeletableTag 
-                    name={tag} 
-                    index={index}
-                    onDelete={onTagDelete} 
-                    filter={tagList[i].filter}
-                />
-            ));
-            list.push(current);
-        }  
-    }
+// const TagsList = ({ tagList, onTagDelete }) => {
+//     let list = [];
+//     for (let i = 0; i < tagList.length; i++) {
+//         if (tagList[i].data.length > 0) {
+//             var current = tagList[i].data.map(( tag, index ) => (
+//                 <DeletableTag 
+//                     name={tag} 
+//                     key={index}
+//                     onDelete={onTagDelete} 
+//                     filter={tagList[i].filter}
+//                 />
+//             ));
+//             list.push(current);
+//         }  
+// }
     
-    return (
-        <div>
-            <ul name="tagsList" className="tagsList">
-                {list}
-            </ul>
-        </div>
+//     return (
+//             <ul className="tagsList">
+//                 {list}
+//             </ul>
       
-    )
-  }
+//     )
+// }
   
-const DeletableTag = ({name, index, onDelete, filter}) => {
-    return (
-        <li>
-        {name} 
-        <a href="#" onClick={e => onDelete(index, filter, e)}>x</a>
-        </li>
-    );
-}
+// const DeletableTag = ({name, index, onDelete, filter}) => {
+//     return (
+//         <li>
+//             {name} 
+//             <a href="#" onClick={e => onDelete(index, filter, e)}>x</a>
+//         </li>
+//     );
+// }
 
 export default SearchBar;
