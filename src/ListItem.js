@@ -42,7 +42,7 @@ function ListItem({ url_name, url, book_name, year_published, category}) {
     });
       
     return (
-        <li style={{padding: 10, margin: 10, listStyle: 'none', background: '#efefef', borderRadius: '10px', boxShadow: '1px 1px 5px #aaa'}}>
+        <li style={{padding: 10, margin: 10, listStyle: 'none', background: '#ffffff', border: '1px black dotted'}}>
             <h2 onClick={(e) => handleElementClick(url, e)} style={{color: 'black'}} >{url_name}</h2>
             <ul className='tagsList' style={{padding: 0}}>{renderedBookTags}{renderedYearTags}{renderedCategoryTags}</ul>
         </li>
