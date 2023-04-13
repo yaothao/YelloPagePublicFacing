@@ -34,3 +34,39 @@
   color: rgb(7, 4, 0);
   background-color: antiquewhite;
 }
+
+/* Styles for the disclaimer alert overlay */
+.disclaimer-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styles for the disclaimer alert content */
+.disclaimer-alert-content {
+  background-color: #ffffff;
+  padding: 24px;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Styles for the "Accept" button */
+.disclaimer-alert-content button {
+  margin-top: 16px;
+}
+
+.about-page{
+  text-align: center;
+  margin-top: 50px;
+}
+
+
+
+

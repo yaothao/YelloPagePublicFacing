@@ -12,6 +12,10 @@ export const initialState = {
     total_tag: [],
 
     frame: [false,''],
+
+    searchTerm: '',
+
+    filteredId: [],
   };
   
   // Selector
@@ -90,6 +94,19 @@ export const initialState = {
         return {
           ...state,
           frame: [false, '']
+        }
+      
+      case 'searchTerm':
+        return {
+          ...state,
+          searchTerm: action.item
+        }
+      
+      case 'filteredId':
+        console.log(action.item);
+        return {
+          ...state,
+          filteredId: action.item
         }
 
       default:

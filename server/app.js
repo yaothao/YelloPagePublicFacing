@@ -48,6 +48,42 @@ app.get('/firstpage', async (req, res) => {
     
 });
 
+app.get('/search', (req, res) => {
+  const filteredId = []
+  const searctTerm = new RegExp(req.query.search, "g");
+
+  try {
+    const jsonString = fs.readFileSync("./data_fts.json");
+    const webs = JSON.parse(jsonString);
+    for (const [ObjectId, desc] of Object.entries(webs)) {
+      var matchInstance = 0;
+      for (const [tag, value] of Object.entries(desc)) {
+          for (var i = 0; i < value.length; i++) {
+            matchedObject = value[i].match(searctTerm);
+            if (matchedObject) {
+              matchInstance += matchedObject.length;
+            }
+          }
+      }
+      if (matchInstance != 0) {
+        filteredId.push({ id : ObjectId, matchInstance : matchInstance});
+      } 
+    }
+
+    filteredId.sort(function(a,b){return b.matchInstance - a.matchInstance});
+
+    var returnObject = [];
+
+    filteredId.forEach(item => returnObject.push(item.id));
+
+    console.log(returnObject);
+    res.json(returnObject);
+  } catch (err) {
+    console.log(err);
+    return;
+  }
+})
+
 app.get('/selectTag', async (req, res) => {
     const query = req.query;
     table.select({

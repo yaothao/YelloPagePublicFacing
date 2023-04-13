@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useStateValue } from "./StateProvider";
 import './SearchBar.css';
 
 
 function SearchBar () {
     const [searchTerm, setSearchTerm] = useState('');
+    const [state, dispatch] = useStateValue('');
 
     // const [inputValue, setInputValue] = useState('');
     
@@ -126,9 +128,10 @@ function SearchBar () {
 
     const handleSearch = () => {
         try {
-        //   const response = await axios.get(`/api/search?query=${searchTerm}`);
-        //   setResults(response.data);
-           console.log({searchTerm}); 
+           dispatch({ 
+            type: 'searchTerm',
+            item: searchTerm, 
+        })
         } catch (error) {
           console.error(error);
         }

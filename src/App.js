@@ -1,15 +1,17 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStateValue } from './StateProvider';
 import SearchBar from './SearchBar';
 import WebBlocks from './WebBlocks';
 import axios from 'axios';
 import WebFrame from './WebFrame';
 import Homebar from './Homebar';
+import About from './About';
 
 function App () {
-  
-  const [{tagList, frame}, dispatch] = useStateValue(); 
+  const [showContent, setShowContent] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [{tagList, frame, searchTerm}, dispatch] = useStateValue(); 
 
   useEffect(() => {
     console.log('fetching fist page...')
@@ -23,7 +25,41 @@ function App () {
         .catch(err => console.log(err));
   }, []);
 
-  const presentLayer = () => {
+  useEffect(() => {
+    console.log('searching term from json...')
+    axios.get('/search', {
+      params: {
+        search: searchTerm
+      }}
+    )
+      .then(res => {
+          dispatch({
+            type: 'filteredId',
+            item: res.data,
+          })
+      })
+        .catch(err => console.log(err));
+  }, [searchTerm]);
+
+  const handleShowContent = () => {
+    setShowContent(true)
+  }
+
+  const handleAboutClicked = () => {
+    setShowAbout(true)
+  }
+
+  const DisclaimerAlert = ({ handleShowContent }) => {
+    return (
+        <div className="disclaimer-alert">
+          <h1>Disclaimer</h1>
+          <p>This is a disclaimer message. Please read and accept to continue.</p>
+          <button onClick={() => handleShowContent()}>Accept</button>
+        </div>
+      )
+  };
+
+  const PresentLayer = () => {
     if (frame[0]) {
       console.log('in frame')
       return(
@@ -44,8 +80,10 @@ function App () {
 
   return (
     <div className="app">
-      <Homebar />
-      {presentLayer()}
+      <Homebar handleAboutClicked={handleAboutClicked}/>
+      {showAbout && <About />}
+      {!showContent && !showAbout && <DisclaimerAlert handleShowContent={handleShowContent}/>}
+      {showContent && !showAbout && <PresentLayer />}
       {/* <Stream /> */}
     </div>
   )

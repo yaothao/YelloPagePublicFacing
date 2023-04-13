@@ -4,7 +4,7 @@ class Helpers {
       let res = filter.map(item => {
         switch(item.filter) {
           case 'book':
-            let bookFilter = item.data.map(d => {
+           let bookFilter = item.data.map(d => {
               return orgBook.includes(d);
             })
             // console.log("bookFilter", bookFilter);
