@@ -18,10 +18,6 @@ export const initialState = {
     filteredId: [],
   };
   
-  // Selector
-  export const generate = (category) => 
-   category?.reduce((amount, item) => item.price + amount, 0);
-  
   const reducer = (state, action) => {
     console.log(action.type)
     switch(action.type) {

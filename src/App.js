@@ -41,12 +41,30 @@ function App () {
         .catch(err => console.log(err));
   }, [searchTerm]);
 
+  useEffect(() => {
+    const hasAccepted = localStorage.getItem('hasAccepted');
+
+    if (hasAccepted) {
+      handleShowContent()
+    }
+  }, []);
+  
+
   const handleShowContent = () => {
-    setShowContent(true)
+    setShowContent(true);
+  };
+
+  const handleAccept = (callback) => {
+    localStorage.setItem('hasAccepted','true');
+    callback();
   }
 
   const handleAboutClicked = () => {
-    setShowAbout(true)
+    setShowAbout(true);
+  };
+
+  const handleAboutBack = () => {
+    setShowAbout(false);
   }
 
   const DisclaimerAlert = ({ handleShowContent }) => {
@@ -54,7 +72,7 @@ function App () {
         <div className="disclaimer-alert">
           <h1>Disclaimer</h1>
           <p>This is a disclaimer message. Please read and accept to continue.</p>
-          <button onClick={() => handleShowContent()}>Accept</button>
+          <button onClick={() => handleAccept(handleShowContent)}>Accept</button>
         </div>
       )
   };
@@ -71,8 +89,6 @@ function App () {
         <div className='searchlayer'>
           <SearchBar />
           <WebBlocks filter={tagList} />
-          {/* {!button && <button className='image_load' onClick={(e) => loadImage()}>Check out this ads page</button>} */}
-          {/* {button && <LazyImageFolder dir={"../src/ads_img"} onCloseLazyImage={onCloseLazyImage}/>} */}
         </div>
       )
     }
@@ -81,7 +97,7 @@ function App () {
   return (
     <div className="app">
       <Homebar handleAboutClicked={handleAboutClicked}/>
-      {showAbout && <About />}
+      {showAbout && <About backBotton={handleAboutBack}/>}
       {!showContent && !showAbout && <DisclaimerAlert handleShowContent={handleShowContent}/>}
       {showContent && !showAbout && <PresentLayer />}
       {/* <Stream /> */}
