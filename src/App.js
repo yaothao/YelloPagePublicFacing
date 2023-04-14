@@ -1,17 +1,18 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { useStateValue } from './StateProvider';
-import SearchBar from './SearchBar';
-import WebBlocks from './WebBlocks';
+import Homepage from './Homepage';
 import axios from 'axios';
 import WebFrame from './WebFrame';
 import Homebar from './Homebar';
 import About from './About';
+import DisclaimerAlert from './DisclaimerAlert';
+import {  Route, Routes, Navigate } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 function App () {
-  const [showContent, setShowContent] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
   const [{tagList, frame, searchTerm}, dispatch] = useStateValue(); 
+  const [hasAccepted, setHasAccpected] = useState(localStorage.getItem('hasAccepted'));
 
   useEffect(() => {
     console.log('fetching fist page...')
@@ -40,67 +41,40 @@ function App () {
       })
         .catch(err => console.log(err));
   }, [searchTerm]);
-
-  useEffect(() => {
-    const hasAccepted = localStorage.getItem('hasAccepted');
-
-    if (hasAccepted) {
-      handleShowContent()
-    }
-  }, []);
   
 
   const handleShowContent = () => {
-    setShowContent(true);
+    setHasAccpected(true);
   };
 
-  const handleAccept = (callback) => {
-    localStorage.setItem('hasAccepted','true');
-    callback();
-  }
-
-  const handleAboutClicked = () => {
-    setShowAbout(true);
-  };
-
-  const handleAboutBack = () => {
-    setShowAbout(false);
-  }
-
-  const DisclaimerAlert = ({ handleShowContent }) => {
-    return (
-        <div className="disclaimer-alert">
-          <h1>Disclaimer</h1>
-          <p>This is a disclaimer message. Please read and accept to continue.</p>
-          <button onClick={() => handleAccept(handleShowContent)}>Accept</button>
-        </div>
-      )
-  };
-
-  const PresentLayer = () => {
-    if (frame[0]) {
-      console.log('in frame')
-      return(
-        <WebFrame />
-      )
+  // const PresentLayer = () => {
+  //   if (frame[0]) {
+  //     console.log('in frame')
+  //     return(
+  //       <WebFrame />
+  //     )
       
-    } else {
-      return (
-        <div className='searchlayer'>
-          <SearchBar />
-          <WebBlocks filter={tagList} />
-        </div>
-      )
-    }
-  }
+  //   } else {
+  //     return (
+  //       <div className='searchlayer'>
+  //         <SearchBar />
+  //         <WebBlocks filter={tagList} />
+  //       </div>
+  //     )
+  //   }
+  // }
 
-  return (
+  return ( 
     <div className="app">
-      <Homebar handleAboutClicked={handleAboutClicked}/>
-      {showAbout && <About backBotton={handleAboutBack}/>}
-      {!showContent && !showAbout && <DisclaimerAlert handleShowContent={handleShowContent}/>}
-      {showContent && !showAbout && <PresentLayer />}
-      {/* <Stream /> */}
+      <Homebar />
+      <Routes>
+          <Route path='/disclaimer' element={hasAccepted ? <Navigate replace to='/'/> : <DisclaimerAlert callback={handleShowContent}/>}/>
+          <Route element={<PrivateRoute hasAccepted={hasAccepted} />}>
+            <Route exact path='/' element={<Homepage />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/webpage:id' element={<WebFrame />} />
+          </Route>
+      </Routes>
     </div>
   )
   

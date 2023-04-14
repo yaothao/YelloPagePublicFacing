@@ -56,18 +56,7 @@
   margin-top: 50px;
 }
 
-.menu-list {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
-.menu-item{
-  display: block;
-  padding: 5px;
-  color: #ffffff;
-}
 
 
 

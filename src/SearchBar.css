@@ -34,17 +34,6 @@ ul.tagsList {
     padding-left: 5px;
 }
 
-a {
-    text-decoration: none;
-    color: #666;
-    margin-left: 5px;
-    padding: 0px 2px 0px 2px;
-}
-
-a:hover {
-    color: #dd3345;
-}
-
 .searchbar {
     margin-top: 45px;
     background-color:  #080808;

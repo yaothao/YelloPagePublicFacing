@@ -48,7 +48,7 @@ app.get('/firstpage', async (req, res) => {
     
 });
 
-app.get('/search', (req, res) => {
+app.get('/search', (req, res, next) => {
   const filteredId = []
   const searctTerm = new RegExp(req.query.search, "g");
 
@@ -76,10 +76,10 @@ app.get('/search', (req, res) => {
 
     filteredId.forEach(item => returnObject.push(item.id));
 
-    console.log(returnObject);
     res.json(returnObject);
   } catch (err) {
     console.log(err);
+    next(err);
     return;
   }
 })
