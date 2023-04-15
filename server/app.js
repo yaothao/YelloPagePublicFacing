@@ -41,11 +41,11 @@ app.get('/firstpage', async (req, res) => {
         result = records.map((record) => {
             return record['fields'];
         })
-        res.json(result)
+        console.log(result.length);
+        res.json(result);
     }).catch(err => {
         res.json({ message: 'could not find data' });
     })
-    
 });
 
 app.get('/search', (req, res, next) => {
@@ -85,97 +85,21 @@ app.get('/search', (req, res, next) => {
 })
 
 app.get('/selectTag', async (req, res) => {
-    const query = req.query;
+    const query = req.query.term;
+    console.log(query);
+    const regex = '^.*([' + query + ']){2,}.*$';
+    var result;
+    const start = Date.now();
     table.select({
         view: 'Grid view',
-        filterByFormula: "SEARCH(‘2000’, ARRAYJOIN({year_published}, ' '))"
+        filterByFormula: `OR(REGEX_MATCH( {category}, '${regex}'), REGEX_MATCH( {book_name}, '${regex}'), REGEX_MATCH( {url_name}, '${regex}'))`
     }).firstPage().then(records => {
-        console.log(records)
         result = records.map((record) => {
             return record['fields'];
         })
+        console.log(`running seach time: ${Math.floor((Date.now() - start) / 1000)}`)
         res.json(result)
     }).catch(err => {
-        res.json({ message: 'could not find data' });
+        res.json({ message: 'could not find data', error: err });
     })
 })
-
-app.get("/api/images", (req, res) => {
-  const imageByteList = getImagesInDir(req.query.dir)
-  res.json({imageByteList})
-    
-});
-
-app.get("/api/stream", (req, res) => {
-  var dir = req.query.dir;
-  console.log('in the beginning')
-  res.writeHead(200, {
-    'Content-Type': 'text/event-stream', // set content type to text/event-stream
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-  });
-
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  const images = files.filter((file) => {
-    if (file.isDirectory()) {
-      return false;
-    } else {
-      const ext = path.extname(file.name).toLowerCase();
-      return ext === ".jpg" || ext === ".jpeg" || ext === ".png" || ext === ".gif";
-    }
-  });
-
-  images.forEach((file) => {
-    const filePath = path.join(dir, file.name);
-    const readStream = fs.createReadStream(filePath);
-    read
-  })
-
-  res.end()
-});
-
-
-function base64_encode(file) {
-  return "data:image/gif;base64,"+fs.readFileSync(file, 'base64');
-}
-
-function getImagesInDir(dir) {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  const images = files.filter((file) => {
-    if (file.isDirectory()) {
-      return true;
-    } else {
-      const ext = path.extname(file.name).toLowerCase();
-      return ext === ".jpg" || ext === ".jpeg" || ext === ".png" || ext === ".gif";
-    }
-  });
-  const imageByteList = images.map((file) => {
-    const filePath = path.join(dir, file.name);
-    if (file.isDirectory()) {
-      return getImagesInDir(filePath);
-    } else {
-      return base64_encode(filePath);
-    }
-  });
-  return imageByteList;
-}
-
-function getImages(directory) {
-  fs.readdir(directory, function (err, files) {
-    var image_byte = "data:image/gif;base64,";
-    async.eachSeries(files, function (file, callback) {
-      var currentFile = path.join(directory, file);
-      fs.stat(currentFile, function (err, stats) {
-        if (stats.isDirectory()) { return getImages(currentFile); } // (2)
-
-        var stream = fs.createReadStream(currentFile).on('end')
-          .on('data', function (data) { 
-            image_byte += data.toString('base64'); });
-      });
-    }, function () {
-      stream.pip(res)
-      res.end(); // (5)
-    });
-  });
-}
-
