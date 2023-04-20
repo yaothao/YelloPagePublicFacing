@@ -1,189 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStateValue } from "./StateProvider";
+import axios from 'axios';
 import './SearchBar.css';
 
 
-function SearchBar () {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [state, dispatch] = useStateValue('');
+function SearchBar ({ loadEntirePage }) {
+    const [{searchTerm}, dispatch] = useStateValue('');
+    const [inputValue, setInputValue] = useState(searchTerm);
 
-    // const [inputValue, setInputValue] = useState('');
-    
-    // const handleNewTag = (tags) => {
-    //   if (this.props.onNewTag) this.props.onNewTag(tags);
-    //   if (this.props.onTagChange) this.props.onTagChange(tags);
-    // }
-  
-    // const handleInputChange = ({target: { value: inputValue }}) => {
-    //   inputValue = inputValue === ',' ? '' : inputValue;
-    //   setInputValue({inputValue});
-    // }
-    
-    // const handleKeyDown = (e) => {
-    //   let { key, target: {value} } = e;
-    //   let { tags } = tagList;
-    //   switch (key) {
-    //     case 'Tab':
-    //       if (value) e.preventDefault();
-    //     case 'Enter':
-    //     case ',':
-    //       value = value.trim();
-    //       if (value && notDuplicate(tags, value)) {
-    //         addTag(value);
-    //       } else {
-    //         setInputValue({inputValue: ''})
-    //       }
-    //       break;
-        // case 'Backspace':
-        //   if (!value) {
-        //     handleTagDelete(tags.length - 1);
-        //   }
-        //   break;
-    //   }
-    // }
-    // const handleTagDelete = (index, filter, e) => {
-    // //   deleteTag(index, () => {
-    // //     this.props.onTagChange(this.state.tags);
-    // //   });
-    //     console.log("handleTagDelete");
-    //     dispatch({
-    //         type: 'deleteTag',
-    //         item: {
-    //             filter: filter,
-    //             index: index,
-    //         }
-    //     })
-    // }
-    // const deleteTag = (index, callback) => {
-    //   let tags = this.state.tags.slice();
-      
-    //   tags.splice(index, 1);
-    //   this.setState({ tags }, () => {
-    //     if (callback) callback();
-    //   });
-    // }
-    
-    // const notDuplicate = (tags, newTag) => {
-    // //   return (!tags.includes(newTag) || this.props.allowDuplicates);
-    //     return true;
-    // }
-    
-    // const addTag = (tag) => {
-    //   if (notDuplicate(tagList, tag)) {
-    //     setInputValue({inputValue: ''});
+    useEffect(() => {
+        if (inputValue === '') {
+            loadEntirePage();
+        }
+    }, [inputValue])
 
-    //   }
-    // }
+    useEffect(() => {
+        setInputValue(searchTerm);
+    }, [searchTerm])
     
-    // const updateControlledTags = (tags) => {
-    //   if (tags && !Helpers.hasDuplicates(tags)) {
-    //     this.setState({ tags }, () => {
-    //       // this.props.onTagChange(tags);
-    //     });
-    //   }
-    // }
-    
-    // const componentWillReceiveProps = (nextProps) => {
-    //   updateControlledTags(nextProps.tags);
-    // }
-    // const renderBookTags = (book_name) => {
-    //     const book_tag_list = book_name?.map((tag, index) => {
-    //         return(
-    //             <Tag 
-    //                 key={index}
-    //                 tag={tag}
-    //                 filter='book'
-    //             /> 
-    //             )
-            
-    //     })
-    //     return book_tag_list
-    // }
-    // const renderYearTags = (year_name) => {
-    //     const year_tag_list = year_name?.map((tag, index) => {
-    //         return(
-    //             <Tag 
-    //                 key={index}
-    //                 tag={tag}
-    //                 filter='year'
-    //             /> 
-    //             )
-            
-    //     })
-    //     return year_tag_list
-    // }
-    // const renderCategoryTags = (category_name) => {
-    //     const category_tag_list = category_name?.map((tag, index) => {
-    //         return(
-    //             <Tag 
-    //                 key={index}
-    //                 tag={tag}
-    //                 filter='category'
-    //             /> 
-    //             )
-            
-    //     })
-    //     return category_tag_list
-    // }
-
     const handleSearch = () => {
         try {
-           dispatch({ 
-            type: 'searchTerm',
-            item: searchTerm, 
-        })
+            axios.get('/search', {
+                params: {
+                  term: inputValue
+                }}
+            )
+            .then(res => {
+                dispatch({
+                    type: 'addElement',
+                    item: res.data,
+                })
+            })
+            .catch(err => console.log(err));
         } catch (error) {
           console.error(error);
         }
     };
 
+    const handleUpdateSearchTerm = () => {
+        dispatch ({
+            type: 'searchTerm',
+            item: inputValue,
+        })
+    }
+
+    const handleInputChange = (value) => {
+        setInputValue(value);
+    }
+
+    const handleKeyDown = (e) => {
+        let { key, target: {value} } = e;
+        switch (key) {
+          case 'Tab':
+            if (value) e.preventDefault();
+            break;
+          case 'Enter':
+            value = value.replace(',',' ').trim();
+            if (value) {
+                handleUpdateSearchTerm();
+                handleSearch();
+            } else {
+                setInputValue('');
+            }
+            break;
+        } 
+    }
+
     return (
         <div className="searchbar">
-            
-            <div className="tagInputWrapper"> 
+            <div className="tagInputWrapper">
+                {/* <p>{searchTerm != '' ? searchTerm : ''}</p> */}
                 <input
                     type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="input"
+                    placeholder='Search...'
+                    value={inputValue}
+                    onChange={(e) => handleInputChange(e.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
-                <button onClick={handleSearch}>Search</button>    
-                {/* <TagsList 
-                    tagList={tagList} 
-                    onTagDelete={handleTagDelete} 
-                    // hashtag={hashtag}
-                /> */}
+                {/* <button onClick={handleSearch}>Search</button>     */}
+                
             </div>
-            {/* <div>
-                <ul className="filterType">
-                    <li style={{listStyle: 'none', padding: 3}}>
-                        <div className="type-title">
-                            Book Name:
-                        </div>
-                        <div className="tags-list">
-                            {renderBookTags(total_tag[0])}
-                        </div>
-                        
-                    </li>
-                    <li style={{listStyle: 'none', padding: 3}}>
-                        <div className="type-title">
-                            Year Published:
-                        </div>
-                        <div className="tags-list">
-                            {renderYearTags(total_tag[1])}
-                        </div>
-                    </li>
-                    <li style={{listStyle: 'none', padding: 3}}>
-                        <div className="type-title">
-                            Category:
-                        </div>
-                        <div className="tags-list">
-                            {renderCategoryTags(total_tag[2])}
-                        </div>
-                    </li>
-                </ul>
-            </div> */}
-    </div>
+        </div>
     );
 }
 

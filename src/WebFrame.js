@@ -3,19 +3,20 @@
 import React from "react";
 import { useStateValue } from "./StateProvider";
 import './WebFrame.css';
+import { useNavigate } from "react-router-dom";
 
 function WebFrame() {
-    const [{ frame }, dispatch] = useStateValue();
+    const [{ frame }] = useStateValue();
+    const navigate = useNavigate();
     
     const handleBackClick = () => {
-        dispatch({
-            type: 'closeurl'
-        })
+        navigate('/');
     }
+
     return (
         <div className="webframe">
-            <button onClick={() => {handleBackClick()}}>Go Back</button>
-            <iframe src={frame[1]} width={'1400px'} height={'730px'}></iframe>
+            <button onClick={() => {handleBackClick()}}>Return</button>
+            <iframe src={frame} width={'1400px'} height={'730px'}></iframe>
         </div>
         
     )

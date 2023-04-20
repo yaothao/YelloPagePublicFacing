@@ -14,8 +14,7 @@ function App () {
   const [{tagList, frame, searchTerm}, dispatch] = useStateValue(); 
   const [hasAccepted, setHasAccpected] = useState(localStorage.getItem('hasAccepted'));
 
-  useEffect(() => {
-    console.log('fetching fist page...')
+  const loadEntirePage = () => {
     axios.get('/firstpage')
         .then(res => {
           dispatch({
@@ -24,23 +23,12 @@ function App () {
           })
         })
         .catch(err => console.log(err));
-  }, []);
+  }
 
   useEffect(() => {
-    console.log('searching term from json...')
-    axios.get('/search', {
-      params: {
-        search: searchTerm
-      }}
-    )
-      .then(res => {
-          dispatch({
-            type: 'filteredId',
-            item: res.data,
-          })
-      })
-        .catch(err => console.log(err));
-  }, [searchTerm]);
+    console.log('fetching fist page...')
+    loadEntirePage();
+  }, []);
   
 
   const handleShowContent = () => {
@@ -63,16 +51,22 @@ function App () {
   //     )
   //   }
   // }
+  const handleUpdateSearchTerm = () => {
+    dispatch ({
+      type: 'searchTerm',
+      item: '',
+    })
+  }
 
   return ( 
     <div className="app">
-      <Homebar />
+      <Homebar handleHomePageClick={handleUpdateSearchTerm}/>
       <Routes>
           <Route path='/disclaimer' element={hasAccepted ? <Navigate replace to='/'/> : <DisclaimerAlert callback={handleShowContent}/>}/>
           <Route element={<PrivateRoute hasAccepted={hasAccepted} />}>
-            <Route exact path='/' element={<Homepage />} />
+            <Route exact path='/' element={<Homepage loadEntirePage={loadEntirePage}/>} />
             <Route path='/about' element={<About />} />
-            <Route path='/webpage:id' element={<WebFrame />} />
+            <Route path='/webpage' element={<WebFrame />} />
           </Route>
       </Routes>
     </div>

@@ -27,12 +27,12 @@ import { useStateValue } from "./StateProvider";
 //     }
 //   ]
 
-function WebBlocks() {
+function WebBlocks({ handleElementClicked }) {
     const [{tagList, element}] = useStateValue();
 
-    let filtered = element.filter(item => Helpers.contains(item.book_name, item.year_published, item.category, tagList));
+    // let filtered = element.filter(item => Helpers.contains(item.book_name, item.year_published, item.category, tagList));
 
-    let renderedItems = filtered.map(({ url_name, url, book_name, year_published, category }, index) => {
+    let renderedItems = element.map(({ category, book_name, url, year_published, url_name }, index) => {
       return (
         <ListItem
           key={index}

@@ -2,7 +2,7 @@ import React from "react";
 
 function Tag({ tag, filter }) {
     return (     
-        <li className="tag clickable">
+        <li className="tag">
             {tag}
         </li>
     )

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from './SearchBar';
 import WebBlocks from './WebBlocks';
+import { useStateValue } from "./StateProvider";
 
-function Homepage() {
+function Homepage({ loadEntirePage }) {
     return (
         <div className='searchlayer'>
-          <SearchBar />
+          <SearchBar loadEntirePage={loadEntirePage}/>
           <WebBlocks />
         </div>
       )
