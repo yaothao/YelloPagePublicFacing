@@ -7,7 +7,7 @@ export default function Homebar({ handleHomePageClick }) {
     // the top welcome notes stays throughout the webpages 
     return (
         <div className="web-title">
-            <img src={sitelogo} alt="Logo" />
+            <Link to='/'><img src={sitelogo} alt="Logo" /></Link>
             <ul className="menu-list">
                 <li className="menu-item"><Link to='/' onClick={handleHomePageClick}>Home</Link></li>
                 <li>
