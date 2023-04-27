@@ -21,13 +21,13 @@ function WebFrame() {
             <div className="info-bar">
                 <button onClick={() => {handleBackClick()}}>Return</button>
                 <Dropdown timestamp={ timestamp }/>
-                <button><a href={'https://web.archive.org/web/2000id_/' + frame}>Wayback Machine</a></button>
+                <button><a href={frame}>Wayback Machine</a></button>
                 <button><a href={frame}>Open Live</a></button>
             </div>
             <div>
                 This is the message saying that the website is opened at what timestamp
             </div>
-            <iframe src={'https://web.archive.org/web/2000id_/' + frame}></iframe>
+            <iframe src={frame}></iframe>
         </div>
         
     )

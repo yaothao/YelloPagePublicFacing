@@ -82,7 +82,7 @@ export const initialState = {
       case 'openurl':
         return{
           ...state,
-          frame: action.item,
+          frame: 'https://web.archive.org/web/2000id_/' + action.item,
         }
       
       case 'closeurl':
