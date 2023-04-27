@@ -4,7 +4,7 @@ import axios from 'axios';
 import './SearchBar.css';
 
 
-function SearchBar ({ loadEntirePage }) {
+function SearchBar ({ loadEntirePage, searchTag }) {
     const [{searchTerm}, dispatch] = useStateValue('');
     const [inputValue, setInputValue] = useState(searchTerm);
 
@@ -17,12 +17,22 @@ function SearchBar ({ loadEntirePage }) {
     useEffect(() => {
         setInputValue(searchTerm);
     }, [searchTerm])
-    
-    const handleSearch = () => {
+
+    useEffect(() => {
+        if (searchTag) {
+            const quotedValue = "\"" + searchTag + "\"";
+            setInputValue(quotedValue);
+            handleUpdateSearchTerm(quotedValue)
+            handleSearch(quotedValue);
+        }
+    },[searchTag])
+
+    const handleSearch = (value) => {
+        console.log(inputValue)
         try {
             axios.get('/search', {
                 params: {
-                  term: inputValue
+                  term: value
                 }}
             )
             .then(res => {
@@ -37,10 +47,10 @@ function SearchBar ({ loadEntirePage }) {
         }
     };
 
-    const handleUpdateSearchTerm = () => {
+    const handleUpdateSearchTerm = (value) => {
         dispatch ({
             type: 'searchTerm',
-            item: inputValue,
+            item: value,
         })
     }
 
@@ -63,8 +73,8 @@ function SearchBar ({ loadEntirePage }) {
           case 'Enter':
             value = value.replace(',',' ').trim();
             if (value) {
-                handleUpdateSearchTerm();
-                handleSearch();
+                handleUpdateSearchTerm(inputValue);
+                handleSearch(inputValue);
             } else {
                 setInputValue('');
             }

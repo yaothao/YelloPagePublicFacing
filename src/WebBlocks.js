@@ -27,7 +27,7 @@ import { useStateValue } from "./StateProvider";
 //     }
 //   ]
 
-function WebBlocks({ handleElementClicked }) {
+function WebBlocks({ handleElementClicked, handleSearchTag }) {
     const [{tagList, element}] = useStateValue();
 
     // let filtered = element.filter(item => Helpers.contains(item.book_name, item.year_published, item.category, tagList));
@@ -41,6 +41,7 @@ function WebBlocks({ handleElementClicked }) {
           book_name={book_name}
           year_published={year_published}
           category={category}
+          handleSearchTag={handleSearchTag}
         />
       );
     });

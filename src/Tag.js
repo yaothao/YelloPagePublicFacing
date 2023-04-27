@@ -1,7 +1,7 @@
 import React from "react";
 import { useStateValue } from "./StateProvider";
 
-function Tag({ tag, filter }) {
+function Tag({ tag, filter, handleClicked }) {
     const [state, dispatch] = useStateValue();
 
     const handleTagClick = () => {
@@ -10,8 +10,9 @@ function Tag({ tag, filter }) {
             item: tag,
         })
     }
+
     return (     
-        <li className="tag" onClick={handleTagClick}>
+        <li className="tag" onClick={()=>handleClicked(tag)}>
             {tag}
         </li>
     )

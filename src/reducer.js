@@ -101,6 +101,7 @@ export const initialState = {
           return {
             ...state,
             searchTerm: state.searchTerm + "\"" + action.item + "\"",
+            // state.searchTerm.splice(-1) == "\"" ? state.searchTerm.splice(0, -1) + action.item + "\"",
           }
       
       case 'filteredId':

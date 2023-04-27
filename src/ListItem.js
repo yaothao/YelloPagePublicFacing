@@ -4,7 +4,7 @@ import { useStateValue } from "./StateProvider";
 import Tag from './Tag';
 
 // Forms each individial block of webpages
-function ListItem({ url_name, url, book_name, year_published, category}) {
+function ListItem({ url_name, url, book_name, year_published, category, handleSearchTag}) {
     const [state, dispatch] = useStateValue();
     const navigate = useNavigate();
     
@@ -22,6 +22,7 @@ function ListItem({ url_name, url, book_name, year_published, category}) {
             key={index}
             tag={tag}
             filter='book'
+            handleClicked={handleSearchTag}
             />
         )
     });
