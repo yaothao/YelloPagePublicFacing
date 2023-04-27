@@ -11,6 +11,7 @@ function WebFrame() {
     
     const timestamp = [20000101, 19991001, 20010304];
 
+
     const handleBackClick = () => {
         navigate('/');
     }
@@ -20,9 +21,13 @@ function WebFrame() {
             <div className="info-bar">
                 <button onClick={() => {handleBackClick()}}>Return</button>
                 <Dropdown timestamp={ timestamp }/>
-                <div>This is the message saying that the website is opened at what timestamp</div>
+                <button><a href={'https://web.archive.org/web/2000id_/' + frame}>Wayback Machine</a></button>
+                <button><a href={frame}>Open Live</a></button>
             </div>
-            <iframe src={frame} width={'1400px'} height={'730px'}></iframe>
+            <div>
+                This is the message saying that the website is opened at what timestamp
+            </div>
+            <iframe src={'https://web.archive.org/web/2000id_/' + frame}></iframe>
         </div>
         
     )
