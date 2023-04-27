@@ -45,6 +45,12 @@ function SearchBar ({ loadEntirePage }) {
     }
 
     const handleInputChange = (value) => {
+        if (value === '') {
+            dispatch ({
+                type: 'searchTerm',
+                item: '',
+            })
+        }
         setInputValue(value);
     }
 
@@ -68,7 +74,7 @@ function SearchBar ({ loadEntirePage }) {
 
     return (
         <div className="searchbar">
-            <div className="tagInputWrapper">
+            <div className="tagInputWrapper" onKeyDown={handleKeyDown}>
                 {/* <p>{searchTerm != '' ? searchTerm : ''}</p> */}
                 <input
                     type="text"

@@ -4,7 +4,6 @@ body {
   
 
 .tagInputWrapper {
-    margin-top: 5px;
     height: flex;
     display: flex;
     flex-flow: row wrap;
@@ -20,11 +19,12 @@ body {
 } */
 
 .searchbar {
-    margin-top: 60px;
     position: fixed;
     width: 100%;
     height: flex;
-    
+    background-color: white;
+    padding: 0px;
+    margin: 0px;
 }
 
 .input {

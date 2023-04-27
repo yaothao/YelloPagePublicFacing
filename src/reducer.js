@@ -96,6 +96,12 @@ export const initialState = {
           ...state,
           searchTerm: action.item
         }
+
+      case 'addSearchTerm':
+          return {
+            ...state,
+            searchTerm: state.searchTerm + "\"" + action.item + "\"",
+          }
       
       case 'filteredId':
         console.log(action.item);

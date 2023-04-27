@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SearchBar from './SearchBar';
 import WebBlocks from './WebBlocks';
-import { useStateValue } from "./StateProvider";
+import './Homepage.css';
 
 function Homepage({ loadEntirePage }) {
     return (

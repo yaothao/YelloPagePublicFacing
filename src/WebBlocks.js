@@ -46,11 +46,9 @@ function WebBlocks({ handleElementClicked }) {
     });
     
     return (
-      <div>
-        <ul className="webblocks">
-          {renderedItems}
-        </ul>
-      </div>
+      <ul className="webblocks">
+        {renderedItems}
+      </ul>
     );
 };
 

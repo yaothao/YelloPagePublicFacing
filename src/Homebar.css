@@ -26,12 +26,9 @@
     margin: 0;
 }
 
-.menu-list li:hover {
-    background: #aaa;
-}
- 
-.menu-item{
-    margin-left: auto;
+.menu-list li{
+    display: flex;
+    align-items: center;
 }
 
 .menu-list a {
@@ -40,3 +37,13 @@
     color: aliceblue;
     text-decoration: none;
 }
+
+.menu-list li:hover {
+    background: #aaa;
+}
+ 
+.menu-item{
+    margin-left: auto;
+}
+
+

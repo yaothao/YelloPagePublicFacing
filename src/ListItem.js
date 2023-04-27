@@ -7,6 +7,7 @@ import Tag from './Tag';
 function ListItem({ url_name, url, book_name, year_published, category}) {
     const [state, dispatch] = useStateValue();
     const navigate = useNavigate();
+    
     // const tags = book_name.concat(year_published, category);
     const handleElementClick = (url) => {
         dispatch({
@@ -49,7 +50,7 @@ function ListItem({ url_name, url, book_name, year_published, category}) {
             <h2 onClick={(e) => handleElementClick(url, e)} >{url_name}</h2>
             <p>{url}</p>
             <ul className='tagsList' style={{padding: 0}}>
-                {renderedBookTags}{renderedYearTags}{renderedCategoryTags}
+                {renderedBookTags}
             </ul>
         </li>
     );
