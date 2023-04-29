@@ -6,65 +6,73 @@ import './WebFrame.css';
 import { useNavigate } from "react-router-dom";
 
 function WebFrame() {
-    const [{ frame }] = useStateValue();
+    const [{ url, showcase_timestamp }] = useStateValue();
+    const [currentTimeStamp, setCurrentTimeStamp] = useState(showcase_timestamp);
+    const [currentUrl, setCurrentUrl] = useState(url);
     const navigate = useNavigate();
     
-    const timestamp = [20000101, 19991001, 20010304];
+    const options = ['-- please select a timestamp --', 20000101, 19991001, 20010304];
 
+    useEffect(() => {
+        if (!url) {
+            const frameObject = JSON.parse(localStorage.getItem('frame-object'));
+            setCurrentUrl(frameObject.url);
+            setCurrentTimeStamp(frameObject.showcase_timestamp);
+        } else {
+            const item = {
+                url: url,
+                showcase_timestamp: showcase_timestamp,
+            }
+            localStorage.setItem('frame-object', JSON.stringify(item));
+        }
+    }, [url, showcase_timestamp])
 
     const handleBackClick = () => {
         navigate('/');
     }
 
+    const handleInputSelected = (value) => {
+        setCurrentTimeStamp(value);
+    };
+
     return (
         <div className="webframe">
             <div className="info-bar">
                 <button onClick={() => {handleBackClick()}}>Return</button>
-                <Dropdown timestamp={ timestamp }/>
-                <button><a href={'https://web.archive.org/web/2000/' + frame}>Wayback Machine</a></button>
-                <button><a href={frame}>Open Live</a></button>
+                <Dropdown timestamp={ showcase_timestamp } options={options} handleInputSelected={handleInputSelected}/>
+                <button><a href={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}>Wayback Machine</a></button>
+                <button><a href={currentUrl}>Open Live</a></button>
             </div>
             <div>
-                This is the message saying that the website is opened at what timestamp
+                You are seeing the webpage {currentUrl} opened with Wayback Machine at time stamp: {currentTimeStamp}
             </div>
-            <iframe src={'https://web.archive.org/web/2000id_/' + frame}></iframe>
+            <iframe src={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}></iframe>
         </div>
         
     )
 }
 
-function Dropdown({ timestamp }) {
-    const [showMenu, setShowMenu] = useState(false);
-    const [selectedValue, setSelectedValue] = useState('');
-
-    useEffect(() => {
-        const handler = () => setShowMenu(false);
-
-        window.addEventListener("click", handler);
-        return () => {
-            window.removeEventListener("click", handler);
-        }
-    })
+function Dropdown({ timestamp, options, handleInputSelected }) {
+    const [currentTimeStamp, setCurrentTimeStamp] = useState(timestamp);
 
     const handleInputClick = (e) => {
         e.stopPropagation();
-        setShowMenu(!showMenu);
+        const value = e.target.value
+        if (value !== "-- please select a timestamp --") {
+            setCurrentTimeStamp(value);
+            handleInputSelected(value);
+        };
     };
 
     return (
-        <div className="dropdown-container">
-            <div className="dropdown-input" onClick={handleInputClick}>
-                <div className="dropdown-selected-value">Select...</div>
-                {showMenu && (
-                    <div className="dropdown-menu">
-                        {timestamp.map((time) => (
-                            <div key={time} className="dropdown-item">
-                                {time}
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+        <div className="dropdown-select">
+            <select onChange={handleInputClick} className="dropdown-menu">
+                {options.map((time) => (
+                    <option key={time} className="dropdown-item">
+                        {time}
+                    </option>
+                ))}
+            </select>
         </div>
     )
 }

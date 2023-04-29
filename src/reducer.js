@@ -1,120 +1,93 @@
 // used for customized state value
 
 export const initialState = {
-    tagList: [
-      {'filter': 'book', 'data':[]},
-      {'filter': 'year', 'data':[]},
-      {'filter': 'category', 'data':[]},
-    ],
+  tagList: [
+    {'filter': 'book', 'data':[]},
+    {'filter': 'year', 'data':[]},
+    {'filter': 'category', 'data':[]},
+  ],
 
-    element: [],
+  element: [],
 
-    total_tag: [],
+  total_tag: [],
 
-    frame: '',
+  url: '',
 
-    searchTerm: '',
+  showcase_timestamp: '',
 
-    filteredId: [],
-  };
-  
-  const reducer = (state, action) => {
-    console.log(action.type)
-    switch(action.type) {
-      case 'addTag':
-        var newTagList = [...state.tagList];
-        newTagList = newTagList.map((item) => {
-          let container = {};
-          if (item.filter === action.item.filter && !item.data.includes(action.item.tag)) {
-            container['filter'] = item.filter;
-            container['data'] = [...item.data, action.item.tag];
-          } else {
-            container = item;
-          }
-          return container;
-        });
+  searchTerm: '',
 
-        console.log(newTagList);
+  filteredId: [],
+};
+
+const reducer = (state, action) => {
+  console.log(action.type)
+  switch(action.type) {
+    // case 'addTag':
+    //   var newTagList = [...state.tagList];
+    //   newTagList = newTagList.map((item) => {
+    //     let container = {};
+    //     if (item.filter === action.item.filter && !item.data.includes(action.item.tag)) {
+    //       container['filter'] = item.filter;
+    //       container['data'] = [...item.data, action.item.tag];
+    //     } else {
+    //       container = item;
+    //     }
+    //     return container;
+    //   });
+
+    //   console.log(newTagList);
+    // return{
+    //   ...state,
+    //   tagList: newTagList,
+    // }
+    
+    // case 'deleteTag':
+    //   newTagList = [...state.tagList];
+    //   newTagList = newTagList.map((item) => {
+    //     let container = {};
+    //     if (item.filter === action.item.filter) {
+    //       container['filter'] = item.filter;
+    //       container['data'] = item.data.splice(action.item.index, 1);
+    //     } else {
+    //       container = item;
+    //     }
+    //     return container;
+    //   });
+    //   return{
+    //     ...state,
+    //     tagList: newTagList,
+    //   }
+    
+    case 'addElement': 
       return{
         ...state,
-        tagList: newTagList,
+        element: action.item,
       }
-      
-      case 'deleteTag':
-        newTagList = [...state.tagList];
-        newTagList = newTagList.map((item) => {
-          let container = {};
-          if (item.filter === action.item.filter) {
-            container['filter'] = item.filter;
-            container['data'] = item.data.splice(action.item.index, 1);
-          } else {
-            container = item;
-          }
-          return container;
-        });
-        return{
-          ...state,
-          tagList: newTagList,
-        }
-      
-      case 'addElement': 
-        
-        // var book_data = new Set()
-        // var year_data = new Set()
-        // var category_data = new Set()
+    
+    case 'openurl':
+      return{
+        ...state,
+        url: action.item.url,
+        showcase_timestamp: action.item.showcase_timestamp,
+      }
+    
+    case 'searchTerm':
+      return {
+        ...state,
+        searchTerm: action.item
+      }
+    
+    case 'filteredId':
+      return {
+        ...state,
+        filteredId: action.item
+      }
 
-        // action.item.forEach(element => {
-        //   book_data.add(...element.book_name)
-        //   year_data.add(...element.year_published)
-        //   category_data.add(...element.category)
-        // });
+    default:
+      return state;
+  }
+      
+};
 
-        // var new_total_tag = []
-        // new_total_tag[0] = [...book_data]
-        // new_total_tag[1] = [...year_data]
-        // new_total_tag[2] = [...category_data]
-        
-        return{
-          ...state,
-          element: action.item,
-        }
-      
-      case 'openurl':
-        return{
-          ...state,
-          frame: action.item,
-        }
-      
-      case 'closeurl':
-        return {
-          ...state,
-          frame: [false, '']
-        }
-      
-      case 'searchTerm':
-        return {
-          ...state,
-          searchTerm: action.item
-        }
-
-      case 'addSearchTerm':
-          return {
-            ...state,
-            searchTerm: state.searchTerm + "\"" + action.item + "\"",
-            // state.searchTerm.splice(-1) == "\"" ? state.searchTerm.splice(0, -1) + action.item + "\"",
-          }
-      
-      case 'filteredId':
-        console.log(action.item);
-        return {
-          ...state,
-          filteredId: action.item
-        }
-
-      default:
-        return state;
-    }
-        
-  };
-  
-  export default reducer;
+export default reducer;

@@ -4,50 +4,24 @@ import { useStateValue } from "./StateProvider";
 import Tag from './Tag';
 
 // Forms each individial block of webpages
-function ListItem({ url_name, url, book_name, year_published, category, handleSearchTag}) {
+function ListItem({ url_name, url, book_name, showcase_timestamp, onTileClicked, onSearchTagClicked}) {
     const [state, dispatch] = useStateValue();
-    const navigate = useNavigate();
     // const tags = book_name.concat(year_published, category);
-    const handleElementClick = (url) => {
-        dispatch({
-            type:'openurl',
-            item:url,
-        })
-        navigate('/webpage');
-    }
+
     const renderedBookTags = book_name.map((tag, index) => {
         return(
             <Tag 
             key={index}
             tag={tag}
             filter='book'
-            handleClicked={handleSearchTag}
-            />
-        )
-    });
-    const renderedYearTags = year_published.map((tag, index) => {
-        return(
-            <Tag 
-            key={index}
-            tag={tag}
-            filter='year'
-            />
-        )
-    });
-
-    const renderedCategoryTags = category.map((tag, index) => {
-        return(
-            <Tag 
-            key={index}
-            tag={tag}
-            filter='category'
+            onSearchTagClicked={onSearchTagClicked}
             />
         )
     });
       
     return (
         <li className='tile' style={{padding: 10, margin: 10, listStyle: 'none', background: '#ffffff', border: '1px black dotted'}}>
-            <h2 style={{cursor: 'pointer'}} onClick={(e) => handleElementClick(url, e)} >{url_name}</h2>
+            <h2 style={{cursor: 'pointer'}} onClick={() => onTileClicked(url, showcase_timestamp)} >{url_name}</h2>
             <p>{url}</p>
             <ul className='tagsList' style={{padding: 0}}>
                 {renderedBookTags}

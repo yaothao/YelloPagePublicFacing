@@ -1,18 +1,18 @@
 import React from "react";
 import { useStateValue } from "./StateProvider";
 
-function Tag({ tag, filter, handleClicked }) {
+function Tag({ tag, filter, onSearchTagClicked }) {
     const [state, dispatch] = useStateValue();
 
-    const handleTagClick = () => {
-        dispatch ({
-            type: 'addSearchTerm',
-            item: tag,
-        })
-    }
+    // const onSearchTagClicked = () => {
+    //     dispatch ({
+    //         type: 'addSearchTerm',
+    //         item: tag,
+    //     })
+    // }
 
     return (     
-        <li className="tag" onClick={()=>handleClicked(tag)}>
+        <li className="tag" onClick={()=>onSearchTagClicked(tag)}>
             {tag}
         </li>
     )

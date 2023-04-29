@@ -35,29 +35,13 @@ function App () {
     setHasAccpected(true);
   };
 
-  // const PresentLayer = () => {
-  //   if (frame[0]) {
-  //     console.log('in frame')
-  //     return(
-  //       <WebFrame />
-  //     )
-      
-  //   } else {
-  //     return (
-  //       <div className='searchlayer'>
-  //         <SearchBar />
-  //         <WebBlocks filter={tagList} />
-  //       </div>
-  //     )
-  //   }
-  // }
   const handleUpdateSearchTerm = () => {
     dispatch ({
       type: 'searchTerm',
       item: '',
     })
   }
-
+  
   return ( 
     <div className="app">
       <Homebar handleHomePageClick={handleUpdateSearchTerm}/>

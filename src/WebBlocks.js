@@ -1,7 +1,6 @@
 // the entire section that contains each individual web blocks
 
 import React from "react";
-import Helpers from "./Helpers";
 import ListItem from "./ListItem";
 import './WebBlocks.css';
 import { useStateValue } from "./StateProvider";
@@ -27,21 +26,21 @@ import { useStateValue } from "./StateProvider";
 //     }
 //   ]
 
-function WebBlocks({ handleElementClicked, handleSearchTag }) {
-    const [{tagList, element}] = useStateValue();
+function WebBlocks({ onTileClicked, handleSearchTag }) {
+    const [{element}] = useStateValue();
 
     // let filtered = element.filter(item => Helpers.contains(item.book_name, item.year_published, item.category, tagList));
 
-    let renderedItems = element.map(({ category, book_name, url, year_published, url_name }, index) => {
+    let renderedItems = element.map(({ book_name, url, url_name, showcase_timestamp }, index) => {
       return (
         <ListItem
           key={index}
           url_name={url_name}
           url={url}
           book_name={book_name}
-          year_published={year_published}
-          category={category}
-          handleSearchTag={handleSearchTag}
+          showcase_timestamp={showcase_timestamp}
+          onTileClicked={onTileClicked}
+          onSearchTagClicked={handleSearchTag}
         />
       );
     });

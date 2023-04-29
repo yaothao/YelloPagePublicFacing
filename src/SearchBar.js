@@ -28,7 +28,6 @@ function SearchBar ({ loadEntirePage, searchTag }) {
     },[searchTag])
 
     const handleSearch = (value) => {
-        console.log(inputValue)
         try {
             axios.get('/search', {
                 params: {

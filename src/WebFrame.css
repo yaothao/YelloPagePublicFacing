@@ -3,26 +3,41 @@ body {
 }
 
 .webframe{
+    position: fixed;
     margin-top: 65px;
-    margin-left: 10px;
-    margin-right: 10px;
     margin-bottom: 0px;
     padding: 0px;
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .webframe button {
-    width: 120px;
-    font-size: 12px;
-    margin: 5px;
+    width: 12vw;
+    height: 77%;
+    font-size: 0.85em;
+    margin: .5em;
     border-radius: 4px;
 }
 
 .webframe button:hover {
     background-color: goldenrod;
     text-shadow: 2px;
+}
+
+.info-bar {
+    display: flex;
+    position: relative;
+    margin-top: .5em;
+    height: 2.5em;
+    align-items: center;
+}
+
+.info-bar a {
+    text-decoration: none;
+    color: black;
+    display: block;
 }
 
 iframe {
@@ -34,15 +49,16 @@ iframe {
     border-radius: 5px;
 }
 
+.dropdown-select{
+    display: flex;
+    margin: .5em;
+}
+
 .dropdown-menu {
-    position: absolute;
-    transform: translateY(4px);
-    width: 100%;
+    padding: 5px;
+    font-size: 0.95em;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: auto;
-    overflow: auto;
-    max-height: 150px;
-    background-color: #fff;
 }
 
 .dropdown-item {
@@ -50,32 +66,8 @@ iframe {
     cursor: pointer;
 }
 
-.dropdown-item:hover {
-    background-color: goldenrod;
-}
 
-.info-bar {
-    display: flex;
-}
 
-.info-bar a {
-    text-decoration: none;
-    color: black;
-}
 
-.dropdown-container {
-    margin-left: 5px;
-    flex: 1 1 auto;
-    text-align: left;
-    border: 1px solid #ccc;
-    position: relative;
-    border-radius: 5px;
-  }
 
-.dropdown-input {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    user-select: none;
-  }
+
