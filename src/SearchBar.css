@@ -7,9 +7,8 @@ body {
     height: flex;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
 }
 
 
@@ -20,26 +19,31 @@ body {
 
 .searchbar {
     position: fixed;
-    width: 100%;
-    height: flex;
-    background-color: white;
+    width: 100vw;
     padding: 0px;
-    margin: 0px;
+    margin: 1em auto;
 }
 
 .input {
     position: relative;
     border-style: none;
-    border: none;
-    display: block;
-    flex: 1 1 auto;
-    min-height: 100%;
-    font-size: 12pt;
+    border: 2px solid black;
+    padding: 0.5em;
+    text-align: center;
+    margin: auto;
+    width: 60vw;
+    font-size: 1.2em;
 }
 
-.tagInputWrapper :focus {
-    outline: blue;
+.input:focus {
+    outline: none;
+    border: 2px solid blue;
 }
+
+
+/* .tagInputWrapper :focus {
+    border: blue;
+} */
 
 /* .filterType {
     color: #444;
