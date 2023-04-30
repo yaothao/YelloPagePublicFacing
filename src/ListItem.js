@@ -20,8 +20,8 @@ function ListItem({ url_name, url, book_name, showcase_timestamp, timestamps, on
     });
       
     return (
-        <li className='tile' style={{padding: 10, margin: 10, listStyle: 'none', background: '#ffffff', border: '1px black dotted'}}>
-            <h2 style={{cursor: 'pointer'}} onClick={() => onTileClicked(url, showcase_timestamp, timestamps)} >{url_name}</h2>
+        <li className='tile'>
+            <h3 onClick={() => onTileClicked(url, showcase_timestamp, timestamps)} >{url_name}</h3>
             <p>{url}</p>
             <ul className='tagsList' style={{padding: 0}}>
                 {renderedBookTags}
