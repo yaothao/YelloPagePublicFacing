@@ -1,6 +1,6 @@
 import React from "react";
 
-function About({backBotton}) {
+function About({}) {
     return (
         <div className="about-page">
             <h1>About</h1> 
