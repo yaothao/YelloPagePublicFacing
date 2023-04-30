@@ -6,26 +6,28 @@ import './WebFrame.css';
 import { useNavigate } from "react-router-dom";
 
 function WebFrame() {
-    const [{ url, showcase_timestamp }] = useStateValue();
+    const [{ url, showcase_timestamp, timestamps}] = useStateValue();
     const [currentTimeStamp, setCurrentTimeStamp] = useState(showcase_timestamp);
     const [currentUrl, setCurrentUrl] = useState(url);
+    const [availableTimestamps, setAvailableTimeStamps] = useState(timestamps);
     const navigate = useNavigate();
     
-    const options = ['-- please select a timestamp --', 20000101, 19991001, 20010304];
 
     useEffect(() => {
         if (!url) {
             const frameObject = JSON.parse(localStorage.getItem('frame-object'));
             setCurrentUrl(frameObject.url);
             setCurrentTimeStamp(frameObject.showcase_timestamp);
+            setAvailableTimeStamps(frameObject.timestamps);
         } else {
             const item = {
                 url: url,
                 showcase_timestamp: showcase_timestamp,
+                timestamps: timestamps,
             }
             localStorage.setItem('frame-object', JSON.stringify(item));
         }
-    }, [url, showcase_timestamp])
+    }, [url, showcase_timestamp, timestamps])
 
     const handleBackClick = () => {
         navigate('/');
@@ -39,7 +41,7 @@ function WebFrame() {
         <div className="webframe">
             <div className="info-bar">
                 <button onClick={() => {handleBackClick()}}>Return</button>
-                <Dropdown timestamp={ showcase_timestamp } options={options} handleInputSelected={handleInputSelected}/>
+                <Dropdown timestamp={ showcase_timestamp } options={availableTimestamps} handleInputSelected={handleInputSelected}/>
                 <button><a href={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}>Wayback Machine</a></button>
                 <button><a href={currentUrl}>Open Live</a></button>
             </div>

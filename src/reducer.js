@@ -15,6 +15,8 @@ export const initialState = {
 
   showcase_timestamp: '',
 
+  timestamps: [],
+
   searchTerm: '',
 
   filteredId: [],
@@ -70,6 +72,7 @@ const reducer = (state, action) => {
         ...state,
         url: action.item.url,
         showcase_timestamp: action.item.showcase_timestamp,
+        timestamps: action.item.timestamps,
       }
     
     case 'searchTerm':

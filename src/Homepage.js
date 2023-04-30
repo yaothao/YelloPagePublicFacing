@@ -15,10 +15,10 @@ function Homepage({ loadEntirePage }) {
     setSearchTag(tag);
   }
 
-  const handleTileClicked = (url, showcase_timestamp) => {
+  const handleTileClicked = (url, showcase_timestamp, timestamps) => {
     dispatch({
       type:'openurl',
-      item:{url:url,showcase_timestamp:showcase_timestamp}
+      item:{url:url, showcase_timestamp:showcase_timestamp, timestamps:timestamps}
     })
     setOpenUrl(true);
   };

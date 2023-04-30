@@ -31,7 +31,7 @@ function WebBlocks({ onTileClicked, handleSearchTag }) {
 
     // let filtered = element.filter(item => Helpers.contains(item.book_name, item.year_published, item.category, tagList));
 
-    let renderedItems = element.map(({ book_name, url, url_name, showcase_timestamp }, index) => {
+    let renderedItems = element.map(({ book_name, url, url_name, showcase_timestamp, available_timestamps }, index) => {
       return (
         <ListItem
           key={index}
@@ -39,6 +39,7 @@ function WebBlocks({ onTileClicked, handleSearchTag }) {
           url={url}
           book_name={book_name}
           showcase_timestamp={showcase_timestamp}
+          timestamps={available_timestamps}
           onTileClicked={onTileClicked}
           onSearchTagClicked={handleSearchTag}
         />
