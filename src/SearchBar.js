@@ -88,7 +88,7 @@ function SearchBar ({ loadEntirePage, searchTag }) {
                 <input
                     type="text"
                     className="input"
-                    placeholder='Press enter to search...'
+                    placeholder='Type a keyword and press enter to search...'
                     value={inputValue}
                     onChange={(e) => handleInputChange(e.target.value)}
                     onKeyDown={handleKeyDown}

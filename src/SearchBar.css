@@ -2,13 +2,15 @@ body {
     font-family: sans-serif;
 }
   
+  
+
+
 
 .tagInputWrapper {
     height: flex;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    padding: 10px;
 }
 
 
@@ -21,23 +23,26 @@ body {
     position: fixed;
     width: 100vw;
     padding: 0px;
-    margin: 1em auto;
+    margin: 0.2em auto;
 }
 
 .input {
     position: relative;
     border-style: none;
-    border: 2px solid black;
+
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
     padding: 0.5em;
     text-align: center;
     margin: auto;
-    width: 60vw;
-    font-size: 1.2em;
+    width: 100vw;
+    font-size: 1em;
 }
 
 .input:focus {
     outline: none;
-    border: 2px solid blue;
+    border-top: 2px solid blue;
+    border-bottom: 2px solid blue;
 }
 
 

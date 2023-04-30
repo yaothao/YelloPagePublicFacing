@@ -24,8 +24,9 @@ function About({}) {
 
             <p>本网站所展示的网页上的内容不代表本网站拥有者的观点或意见。用户在访问这些网站时，必须谨慎对待这些网站上的信息，并且不能把这些信息当作是准确的或者最新的。本网站不为因为使用老网页上的信息所导致的任何伤害或者损失承担责任。如果你是在本网站上展示的一个网页的原拥有者，并希望您的网页不在此被展示，请致信 tktktk@tktktk.com。</p>
 
-            <p>The project is partly sponsored by the Puget Sound Public Interest Technology Clinic. </p>
+            <p>The project is partly sponsored by the Puget Sound Public Interest Technology Clinic. This website is not affiliated with the Internet Archive.  </p>
 
+            <p>本网站由 Puget Sound Public Interest Technology Clinic 部分赞助开发。本网站与互联网档案馆(Internet Archive)没有关系。</p>
         </div>
              
     )

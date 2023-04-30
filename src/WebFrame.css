@@ -14,16 +14,51 @@ body {
 }
 
 .webframe button {
-    width: 12vw;
-    height: 77%;
-    font-size: 0.85em;
-    margin: .5em;
-    border-radius: 4px;
+    margin: 0 0.5em;
+    padding: 0.5em 1em;
+    border: 1px solid black;
+    border-radius: 0.5em;
+    background-color: white;
+    color: black;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+a.button{
+    margin: 0 0.5em;
+    padding: 0.5em 1em;
+    border: 1px solid black;
+    border-radius: 0.5em;
+    background-color: white;
+    color: black;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .webframe button:hover {
-    background-color: goldenrod;
-    text-shadow: 2px;
+    background-color: white;
+    color: blue;
+    border: 1px blue solid;
+}
+
+a.button:hover {
+    background-color: white;
+    color: blue;
+    border: 1px blue solid;
+}
+
+.webframe button:active {
+    background-color: blue;
+    color: white;
+    border: 1px blue solid;
+}
+
+a.button:active {
+    background-color: blue;
+    color: white;
+    border: 1px blue solid;
 }
 
 .info-bar {
@@ -40,11 +75,17 @@ body {
     display: block;
 }
 
+.info-bar a:hover {
+    text-decoration: none;
+    color: blue;
+    display: block;
+}
+
 iframe {
     /*width: 100%;*/
     width: 86vh;
     height: 65vh;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     margin: 10vh auto;
     border-radius: 5px;
 }
@@ -52,6 +93,9 @@ iframe {
 .dropdown-select{
     display: flex;
     margin: .5em;
+    height: 2em;
+    border-radius: 0;
+    background: white;
 }
 
 .dropdown-menu {

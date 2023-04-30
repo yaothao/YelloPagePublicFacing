@@ -39,13 +39,13 @@ function WebFrame() {
     return (
         <div className="webframe">
             <div className="info-bar">
-                <button onClick={() => {handleBackClick()}}>Return</button>
+                <button onClick={() => {handleBackClick()}}>Go back</button>
                 <Dropdown timestamp={ showcase_timestamp } options={availableTimestamps} handleInputSelected={handleInputSelected}/>
-                <button><a href={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}>Wayback Machine</a></button>
-                <button><a href={currentUrl}>Open Live</a></button>
+                <a className="button" target="_blank" rel="noopener noreferrer" href={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}>Open in Wayback Machine</a>
+                <a className="button" href={currentUrl}>Open Live</a>
             </div>
-            <div>
-                You chose to view {currentUrl} archived by the Wayback Machine at: {currentTimeStamp}
+            <div style={{margin: '0.5em', textAlign: 'center', lineHeight:'1.5em'}}>
+                You opened {currentUrl} archived by the Wayback Machine at: {currentTimeStamp}. <br/> The URL of the actual web page displayed below might be different from the one you opened. <br/> The Y2K Chinese-language Web Showcase is not responsible for the content of the web page. <br/> 
             </div>
             <iframe src={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}></iframe>
         </div>
