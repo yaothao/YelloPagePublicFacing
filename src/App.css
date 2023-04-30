@@ -21,11 +21,10 @@
 /* Styles for the disclaimer alert overlay */
 .disclaimer-alert {
   position: fixed;
-  top: 0;
+  top: 0%;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,16 +33,27 @@
 
 /* Styles for the disclaimer alert content */
 .disclaimer-alert {
-  background-color: aliceblue;
   margin: auto;
-  padding: 20px;
   max-width: 60vw;
   text-align: left;
 }
 
 /* Styles for the "Accept" button */
 .disclaimer-alert button {
+  margin: 0 0.5em;
+  padding: 0.5em 1em;
+  border: 1px solid black;
+  border-radius: 0.5em;
+  background-color: white;
+  color: black;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+}
 
+.disclaimer-alert button:hover {
+  background-color: blue;
+  color: white;
 }
 
 .about-page{

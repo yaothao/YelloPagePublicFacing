@@ -47,6 +47,7 @@ div.urlstub h3{
 
 div.urlstub p{
     margin: 0;
+    line-break: anywhere;
 }
 
 div.urlstub:hover {
