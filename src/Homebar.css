@@ -3,26 +3,28 @@
 }
 
 .web-title{
-    font-size: 18pt;
-    background-color:  #080808;
-    color: aliceblue;
+    font-size: 1em;
+    background-color:  white;
     position: fixed;
     margin-top: 0px;
     padding: 0px;
     height: 65px;
     width: 100%;
+    border-bottom: 1px solid black;
     display: flex;
 }
 
 .web-title img {
     padding: 10px;
+    filter: invert(1);
+    pointer-events: none; /*make svg unselectable*/
 }
 
 .menu-list{
     width: 100%;
     display: flex;
     list-style: none;
-    padding: 0;
+    padding: 0.1em;
     margin: 0;
 }
 
@@ -34,12 +36,12 @@
 .menu-list a {
     display: block;
     padding: 5px;
-    color: aliceblue;
+    color: black;
     text-decoration: none;
 }
 
-.menu-list li:hover {
-    background: #aaa;
+.menu-list li a:hover {
+    color: blue;
 }
  
 .menu-item{

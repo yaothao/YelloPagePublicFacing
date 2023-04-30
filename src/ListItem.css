@@ -33,20 +33,24 @@ li.tile{
 
 div.urlstub {
     display: inline-block;
-    padding: 0;
+    padding: 0 0 0 0.5em;
     margin: 0;
+    cursor: pointer;
 }
 
 div.urlstub h3{
     padding: 0;
     margin: 0;
-    cursor: pointer;
     font-family: serif;
     font-weight: 500;
 }
 
 div.urlstub p{
     margin: 0;
+}
+
+div.urlstub:hover {
+    color: blue;
 }
 
 li.tile ul{

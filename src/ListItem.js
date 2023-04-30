@@ -21,8 +21,8 @@ function ListItem({ url_name, url, book_name, showcase_timestamp, timestamps, on
       
     return (
         <li className='tile'>
-            <div className='urlstub'>
-                <h3 onClick={() => onTileClicked(url, showcase_timestamp, timestamps)} >{url_name}</h3>
+            <div onClick={() => onTileClicked(url, showcase_timestamp, timestamps)} className='urlstub'>
+                <h3>{url_name}</h3>
                 <p>{url}</p>
             </div>
 
