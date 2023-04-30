@@ -33,16 +33,17 @@
 }
 
 /* Styles for the disclaimer alert content */
-.disclaimer-alert-content {
-  background-color: #ffffff;
-  padding: 24px;
-  max-width: 400px;
-  text-align: center;
+.disclaimer-alert {
+  background-color: aliceblue;
+  margin: auto;
+  padding: 20px;
+  max-width: 60vw;
+  text-align: left;
 }
 
 /* Styles for the "Accept" button */
-.disclaimer-alert-content button {
-  margin-top: 16px;
+.disclaimer-alert button {
+
 }
 
 .about-page{

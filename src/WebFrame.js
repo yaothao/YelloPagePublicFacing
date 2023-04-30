@@ -9,9 +9,8 @@ function WebFrame() {
     const [{ url, showcase_timestamp, timestamps}] = useStateValue();
     const [currentTimeStamp, setCurrentTimeStamp] = useState(showcase_timestamp);
     const [currentUrl, setCurrentUrl] = useState(url);
-    const [availableTimestamps, setAvailableTimeStamps] = useState(timestamps);
+    const [availableTimestamps, setAvailableTimeStamps] = useState(["Select a timestamp", ...timestamps]);
     const navigate = useNavigate();
-    
 
     useEffect(() => {
         if (!url) {
@@ -46,7 +45,7 @@ function WebFrame() {
                 <button><a href={currentUrl}>Open Live</a></button>
             </div>
             <div>
-                You are seeing the webpage {currentUrl} opened with Wayback Machine at time stamp: {currentTimeStamp}
+                You chose to view {currentUrl} archived by the Wayback Machine at: {currentTimeStamp}
             </div>
             <iframe src={'https://web.archive.org/web/' + currentTimeStamp + '/' + currentUrl}></iframe>
         </div>
@@ -60,7 +59,7 @@ function Dropdown({ timestamp, options, handleInputSelected }) {
     const handleInputClick = (e) => {
         e.stopPropagation();
         const value = e.target.value
-        if (value !== "-- please select a timestamp --") {
+        if (value !== "Select a timestamp") {
             setCurrentTimeStamp(value);
             handleInputSelected(value);
         };
