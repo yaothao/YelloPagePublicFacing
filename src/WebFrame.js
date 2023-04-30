@@ -21,8 +21,8 @@ function WebFrame() {
         } else {
             const item = {
                 url: url,
-                showcase_timestamp: showcase_timestamp,
-                timestamps: timestamps,
+                showcase_timestamp: currentTimeStamp,
+                timestamps: ["Select a timestamp", ...timestamps],
             }
             localStorage.setItem('frame-object', JSON.stringify(item));
         }
