@@ -3,7 +3,7 @@ import React from "react";
 function About({}) {
     return (
         <div className="about-page">
-            <h1>About</h1> 
+            <h1>About 关于</h1> 
             <p>This website showcases Chinese-language web pages at the turn of the millennium. The web pages are collected from "Internet directory" books published in the late 1990s and early 2000s in mainland China, covering web pages produced by people based in Chinese-speaking regions and diaspora communities across the globe. </p>
 
             <p>These directory books - often marketed as “yellow pages” of the Internet - provide lists of URLs of Chinese-language web pages organised into hierarchical categories for Chinese-speaking Internet users. These directory books provide insight into how the Internet was experienced and used by Chinese-speaking users at the turn of the millenium.</p>
