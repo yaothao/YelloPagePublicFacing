@@ -40,7 +40,7 @@ export default function Navigation() {
         className={({ open }) =>
           clsx(
             open ? 'w-full z-40 overflow-y-auto' : '',
-            'sticky top-0 bg-white dark:bg-black shadow-sm lg:overflow-y-visible border-b-2 border-black dark:border-white z-50'
+            'sticky top-0 bg-white dark:bg-black shadow-sm lg:overflow-y-visible border-b-2 border-black dark:border-white z-10'
           )
         }
       >
@@ -88,11 +88,13 @@ export default function Navigation() {
                       className='w-full'
                       onSubmit={(e) => {
                         e.preventDefault();
-                        if (e.target.search.value === '') {
+                        const target = e.target as HTMLFormElement;
+                        const search = target.getElementsByTagName('input')[0];
+                        if (search.value === '') {
                           router.push('/');
                           return;
                         }
-                        router.push(`/?search=${e.target.search.value}`);
+                        router.push(`/?search=${search.value}`);
                       }}
                     >
                       <label htmlFor='search' className='sr-only'>

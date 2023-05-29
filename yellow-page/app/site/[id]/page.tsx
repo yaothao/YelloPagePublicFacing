@@ -27,20 +27,10 @@ export default function Site({ params: { id } }: { params: { id: string } }) {
       .then((res) => res.json())
       .then((data: TSite) => {
         setData(data);
-        console.log(data, 'data');
         setLoading(false);
         setSelectedTimeStamp(data.showcase_timestamp);
       });
   }, []);
-
-  useEffect(() => {
-    if (!selectedTimeStamp) return;
-    console.log(
-      `https://web.archive.org/web/${convertDateToUTCString(
-        selectedTimeStamp
-      )}/${data?.url}`
-    );
-  }, [selectedTimeStamp]);
 
   return (
     <>

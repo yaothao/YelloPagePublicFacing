@@ -18,8 +18,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={clsx(inter.className, 'min-h-screen')}>
-        <Navigation />
         <DisclaimerProvider>
+          <Navigation />
           <main className='flex h-full flex-col items-center justify-between'>
             {children}
           </main>
