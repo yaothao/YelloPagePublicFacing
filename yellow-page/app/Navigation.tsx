@@ -18,14 +18,15 @@ const navigation = [
 export default function Navigation() {
   const router = useRouter();
 
+  // Highlight the current page
   const pathName = usePathname();
   navigation.forEach((item) => {
     item.current = item.href === pathName;
   });
 
+  // Search bar state, init from URL
   const searchParams = useSearchParams();
   const initialSearch = searchParams.get('search');
-
   const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
