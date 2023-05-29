@@ -11,6 +11,8 @@ import {
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 
+import { useDisclaimerContext } from './DisclaimerProvider';
+
 export default function Home() {
   const [data, setData] = useState<TSite[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,7 +28,7 @@ export default function Home() {
         setData(data);
         setLoading(false);
       });
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -98,16 +100,17 @@ export default function Home() {
             </li>
           ))}
         </ul>
-      </section>
 
-      {data.length === 0 && !loading && (
-        <div className='flex flex-col items-center justify-center w-full h-full text-center mt-16'>
-          <p className='text-2xl font-semibold'>No results found.</p>
-          <p className='text-lg font-semibold'>
-            Try searching for something else.
-          </p>
-        </div>
-      )}
+        {/* No results found */}
+        {data.length === 0 && !loading && (
+          <div className='flex flex-col items-center justify-center w-full h-full text-center mt-16'>
+            <p className='text-2xl font-semibold'>No results found.</p>
+            <p className='text-lg font-semibold mt-2'>
+              Try searching for something else.
+            </p>
+          </div>
+        )}
+      </section>
     </>
   );
 }

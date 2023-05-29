@@ -7,7 +7,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const navigation = [
@@ -16,6 +16,8 @@ const navigation = [
 ];
 
 export default function Navigation() {
+  const router = useRouter();
+
   const pathName = usePathname();
   navigation.forEach((item) => {
     item.current = item.href === pathName;
@@ -82,7 +84,17 @@ export default function Navigation() {
                 {/* Search bar */}
                 <div className='min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6'>
                   <div className='flex items-center px-6 py-4 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0'>
-                    <form className='w-full'>
+                    <form
+                      className='w-full'
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        if (e.target.search.value === '') {
+                          router.push('/');
+                          return;
+                        }
+                        router.push(`/?search=${e.target.search.value}`);
+                      }}
+                    >
                       <label htmlFor='search' className='sr-only'>
                         Search
                       </label>
