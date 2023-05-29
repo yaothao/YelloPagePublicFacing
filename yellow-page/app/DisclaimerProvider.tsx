@@ -91,12 +91,6 @@ const DisclaimerModal = () => {
             >
               <Dialog.Panel className='relative transform overflow-scroll rounded-sm bg-white dark:bg-black px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl max-h-[80vh] sm:p-6'>
                 <div>
-                  {/* <div className='mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100'>
-                    <CheckIcon
-                      className='h-6 w-6 text-green-600'
-                      aria-hidden='true'
-                    />
-                  </div> */}
                   <div className='mt-3 sm:mt-5'>
                     <div className='mt-2 flex gap-8 flex-col md:flex-row'>
                       <div>
