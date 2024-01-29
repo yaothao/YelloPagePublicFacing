@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+### The Yellow Page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website showcases Chinese-language web pages at the turn of the millennium. The web pages are collected from "Internet directory" books published in the late 1990s and early 2000s in mainland China, covering web pages produced by people based in Chinese-speaking regions and diaspora communities across the globe.
 
-## Available Scripts
+These directory books - often marketed as “yellow pages” of the Internet - provide lists of URLs of Chinese-language web pages organised into hierarchical categories for Chinese-speaking Internet users. These directory books provide insight into how the Internet was experienced and used by Chinese-speaking users at the turn of the millenium.
 
-In the project directory, you can run:
+On this website, you can visit some of the URLs featured in these books via the Internet Archive's Wayback Machine.
 
-### `npm start`
+You can use the search box on the main page to search for web pages containing certain keywords in their titles or category information (to be implemented), or use the book filter on the right column to view web pages included in one particular directory book.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The content on these web pages does not reflect the views or opinions of the owners of this website. Visitors are advised to use their own discretion when browsing these websites and should not rely on the information presented as accurate or current. The owners of this website are not responsible for any harm, damage, or loss that may occur from using the content or information provided on these old websites. Please note that the web pages showcased on the website are archived the copies stored on the Wayback Machine, and this website does not host any archived web page material.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The project is partly sponsored by the Puget Sound Public Interest Technology Clinic of the University of Washington. This website is not affiliated with the Internet Archive.
 
-### `npm test`
+### Live Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The main page of the webpage demonstrates all of the representative Chinese Archived Websites. The list consists of around 200 weblinks dynamcally received from the Airtable database. 
+<br><br> 
+<img src="img/main.png" alt="main page of the website" width="600"/>
 
-### `npm run build`
+The website enables full-text search functionality on both the website name and related publishment. The search syntax and content is encapsulated and passed through Airtable database api. The full-text search on related publishment is trigger by clicking on the individual tags. 
+<br><br>
+<img src="img/showing_search_feature.png" alt="main page of the website" width="600"/>
+<br><br>
+<img src="img/showing_search_tag.png" alt="main page of the website" width="600"/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once the user click on a link, the webpage will present a detailed description of the archived web page. The User can interact with the archived webpage through iframe and select availble archival timeslot to see the webpage in different stages. 
+<br><br>
+<img src="img/showing_webpage.png" alt="main page of the website" width="600"/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
